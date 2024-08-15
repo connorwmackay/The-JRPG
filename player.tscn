@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8nvnh07w5y1s"]
+
+[ext_resource type="Script" path="res://player_controller.gd" id="1_3rm2x"]
+[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://isometric_prototype.png" id="1_7ypx0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xo83x"]
+atlas = ExtResource("1_7ypx0")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_17v1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xo83x")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="Player" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_3rm2x")
+move_speed = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_17v1u")
+animation = &"new_animation"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, -2, -16, 9, 0, 16, 16, 9, 16, -2, 0, 3)
