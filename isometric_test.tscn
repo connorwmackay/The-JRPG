@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=9 format=3 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://isometric_prototype.png" id="1_gljo0"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://player.tscn" id="2_gqevl"]
 [ext_resource type="Script" path="res://hide_on_play.gd" id="3_87hyh"]
+[ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://npc.tscn" id="3_wqrik"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
 texture = ExtResource("1_gljo0")
@@ -866,6 +867,18 @@ layer_3/tile_data = PackedInt32Array(65538, 0, 0, 196607, 0, 0, 65537, 0, 0, 131
 z_index = 1
 y_sort_enabled = true
 position = Vector2(1, 16)
+
+[node name="NPC" parent="TileMap" instance=ExtResource("3_wqrik")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-176, 89)
+npc_name = "Rem"
+
+[node name="NPC2" parent="TileMap" instance=ExtResource("3_wqrik")]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(113, 73)
+npc_name = "Zero Two"
 
 [node name="TileMap_Collisions" type="TileMap" parent="."]
 y_sort_enabled = true

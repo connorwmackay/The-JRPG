@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ifvmqy654etv"]
+
+[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://isometric_prototype.png" id="1_uqr1r"]
+[ext_resource type="Script" path="res://npc_controller.gd" id="2_kwh4r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yfdh"]
+atlas = ExtResource("1_uqr1r")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mosmj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yfdh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="NPC" type="RigidBody2D" groups=["npc"]]
+gravity_scale = 0.0
+max_contacts_reported = 100
+contact_monitor = true
+script = ExtResource("2_kwh4r")
+npc_name = "NPC"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.50997, 0.547035, 1, 1)
+sprite_frames = SubResource("SpriteFrames_mosmj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+polygon = PackedVector2Array(0, -7, -16, 0, 0, 8, 16, 0)

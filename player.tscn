@@ -18,8 +18,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
 gravity_scale = 0.0
+max_contacts_reported = 100
+contact_monitor = true
 script = ExtResource("1_3rm2x")
 move_speed = 1
 
@@ -31,4 +33,4 @@ animation = &"new_animation"
 zoom = Vector2(2, 2)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-16, -2, -16, 9, 0, 16, 16, 9, 16, -2, 0, 3)
+polygon = PackedVector2Array(-15, 0, 0, 7, 15, 0, 0, -7)
