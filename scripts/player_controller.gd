@@ -33,3 +33,6 @@ func _process(delta):
 				# Interact with an NPC
 				if body.is_in_group("npc"):
 					body.player_interaction()
+				# Interact with an Object
+				elif body.is_in_group("interactable"):
+					body.player_interaction()

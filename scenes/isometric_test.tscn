@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=11 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
+[ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_object.tscn" id="6_i8e85"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
 texture = ExtResource("4_2uqo8")
@@ -369,3 +370,7 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAD4/wwAAAAAAAAAAAD4/w0AAAAAAAAAAAD5/w4AAAAAAAAAAAD5/w8AAAAAAAAAAAD6/xAAAAAAAAAAAAD6/xEAAAAAAAAAAAD7/xIAAAAAAAAAAAD+/wwAAAAAAAAAAAD9/w0AAAAAAAAAAAD9/w4AAAAAAAAAAAD8/w8AAAAAAAAAAAD8/xAAAAAAAAAAAAD7/xEAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD7/wcAAAAAAAAAAAD7/wYAAAAAAAAAAAD///3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAEAAsAAAAAAAAAAAAEAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAACAA8AAAAAAAAAAAACABAAAAAAAAAAAAABABEAAAAAAAAAAAABABIAAAAAAAAAAAD+/w0AAAAAAAAAAAD//w4AAAAAAAAAAAD//w8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAAAAAAAAAD+/wsAAAAAAAAAAAACAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAD///z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD5/wcAAAAAAAAAAAD5/wgAAAAAAAAAAAD4/wkAAAAAAAAAAAD4/woAAAAAAAAAAAD3/wsAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_v4xmn")
 script = ExtResource("5_i7fg0")
+
+[node name="InteractableObject" parent="." instance=ExtResource("6_i8e85")]
+position = Vector2(-48, 24)
+object_name = "Key"
