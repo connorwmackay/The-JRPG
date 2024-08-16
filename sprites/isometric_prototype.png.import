@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nawqgya81boe"
-path="res://.godot/imported/isometric_prototype.png-aabe319953c4708c5592b034f72ad963.ctex"
+path="res://.godot/imported/isometric_prototype.png-9bb5eb490e0b02375100ba44f389599e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://isometric_prototype.png"
-dest_files=["res://.godot/imported/isometric_prototype.png-aabe319953c4708c5592b034f72ad963.ctex"]
+source_file="res://sprites/isometric_prototype.png"
+dest_files=["res://.godot/imported/isometric_prototype.png-9bb5eb490e0b02375100ba44f389599e.ctex"]
 
 [params]
 

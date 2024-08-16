@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b8nvnh07w5y1s"]
 
-[ext_resource type="Script" path="res://player_controller.gd" id="1_3rm2x"]
-[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://isometric_prototype.png" id="1_7ypx0"]
+[ext_resource type="Script" path="res://scripts/player_controller.gd" id="1_3rm2x"]
+[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="1_7ypx0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xo83x"]
 atlas = ExtResource("1_7ypx0")

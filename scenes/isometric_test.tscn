@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=4 uid="uid://blpjrx6evcgfq"]
 
-[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://isometric_prototype.png" id="1_gljo0"]
-[ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://player.tscn" id="2_gqevl"]
-[ext_resource type="Script" path="res://hide_on_play.gd" id="3_87hyh"]
-[ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://npc.tscn" id="3_wqrik"]
-[ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://event_area.tscn" id="5_2gtkq"]
+[ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
+[ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
+[ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
+[ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
+[ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
-texture = ExtResource("1_gljo0")
+texture = ExtResource("4_2uqo8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -198,7 +198,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bxi1g")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bfi1g"]
-texture = ExtResource("1_gljo0")
+texture = ExtResource("4_2uqo8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/modulate = Color(0.472906, 0.0670776, 0.0930911, 0.588235)
@@ -304,26 +304,26 @@ sources/0 = SubResource("TileSetAtlasSource_bfi1g")
 [node name="IsometricTest" type="Node2D"]
 y_sort_enabled = true
 
-[node name="EventArea_R2" parent="." instance=ExtResource("5_2gtkq")]
+[node name="EventArea_R2" parent="." instance=ExtResource("1_w2rhd")]
 position = Vector2(-105, 86)
 scale = Vector2(2, 2)
 event_area_name = "Room 2"
 
-[node name="EventArea_R1" parent="." instance=ExtResource("5_2gtkq")]
+[node name="EventArea_R1" parent="." instance=ExtResource("1_w2rhd")]
 position = Vector2(27, 77)
 scale = Vector2(2, 2)
 event_area_name = "Room 1"
 
-[node name="Player" parent="." instance=ExtResource("2_gqevl")]
+[node name="Player" parent="." instance=ExtResource("2_k7m5x")]
 z_index = 1
 position = Vector2(1, 16)
 
-[node name="NPC" parent="." instance=ExtResource("3_wqrik")]
+[node name="NPC" parent="." instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(-176, 89)
 npc_name = "Rem"
 
-[node name="NPC2" parent="." instance=ExtResource("3_wqrik")]
+[node name="NPC2" parent="." instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(113, 73)
 npc_name = "Zero Two"
@@ -360,7 +360,7 @@ tile_set = SubResource("TileSet_kify3")
 y_sort_enabled = true
 use_parent_material = true
 tile_set = SubResource("TileSet_v4xmn")
-script = ExtResource("3_87hyh")
+script = ExtResource("5_i7fg0")
 
 [node name="CollisionTilemap_Layer1" type="TileMapLayer" parent="."]
 z_index = 1
@@ -368,4 +368,4 @@ y_sort_enabled = true
 use_parent_material = true
 tile_map_data = PackedByteArray("AAD4/wwAAAAAAAAAAAD4/w0AAAAAAAAAAAD5/w4AAAAAAAAAAAD5/w8AAAAAAAAAAAD6/xAAAAAAAAAAAAD6/xEAAAAAAAAAAAD7/xIAAAAAAAAAAAD+/wwAAAAAAAAAAAD9/w0AAAAAAAAAAAD9/w4AAAAAAAAAAAD8/w8AAAAAAAAAAAD8/xAAAAAAAAAAAAD7/xEAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD7/wcAAAAAAAAAAAD7/wYAAAAAAAAAAAD///3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAEAAsAAAAAAAAAAAAEAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAACAA8AAAAAAAAAAAACABAAAAAAAAAAAAABABEAAAAAAAAAAAABABIAAAAAAAAAAAD+/w0AAAAAAAAAAAD//w4AAAAAAAAAAAD//w8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAAAAAAAAAD+/wsAAAAAAAAAAAACAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAD///z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD5/wcAAAAAAAAAAAD5/wgAAAAAAAAAAAD4/wkAAAAAAAAAAAD4/woAAAAAAAAAAAD3/wsAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_v4xmn")
-script = ExtResource("3_87hyh")
+script = ExtResource("5_i7fg0")
