@@ -19,9 +19,10 @@ animations = [{
 }]
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
+y_sort_enabled = true
 gravity_scale = 0.0
-max_contacts_reported = 100
 contact_monitor = true
+max_contacts_reported = 100
 script = ExtResource("1_3rm2x")
 move_speed = 1
 
