@@ -1,6 +1,10 @@
 extends RigidBody2D
+class_name PlayerController
 
 @export var move_speed = 10
+
+# The player won't be able to be controlled when is_locked is true
+var is_locked: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,10 +15,15 @@ func _ready():
 	# Setup the Rigidbody
 	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 	set_lock_rotation_enabled(true)
+	
+	is_locked = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if is_locked:
+		return
+	
 	# Move Forward / Backward and Right / Left
 	if Input.is_action_pressed("MoveForward"):
 		move_and_collide(Vector2(move_speed, move_speed * 0.5) * -1.0)

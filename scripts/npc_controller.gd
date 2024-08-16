@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @export var npc_name: String = "npc"
+@export var npc_dialogue: Array[Dictionary] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,4 +11,5 @@ func _ready():
 
 # Called when the player presses the "Interact" button/key
 func player_interaction():
-	print("The player interacted with " + npc_name)
+	for dialogue in npc_dialogue:
+		get_tree().get_first_node_in_group("dialogue_box").queue_dialogue(dialogue["name"], dialogue["text"])

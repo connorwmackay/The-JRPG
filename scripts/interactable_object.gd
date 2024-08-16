@@ -17,4 +17,4 @@ func _ready() -> void:
 
 
 func player_interaction():
-	print("Player interacted with " + object_name)
+	get_tree().get_first_node_in_group("dialogue_box").queue_dialogue("Hero", "Found a " + object_name + "!")
