@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=15 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
-[ext_resource type="Script" path="res://dialogue_item.gd" id="4_gnl7v"]
+[ext_resource type="Script" path="res://scripts/dialogue_item.gd" id="4_gnl7v"]
+[ext_resource type="Script" path="res://nodes/quest.gd" id="5_dkmqc"]
+[ext_resource type="Script" path="res://scripts/dialogue_tree.gd" id="5_dod1e"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
-[ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_object.tscn" id="6_i8e85"]
+[ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_item.tscn" id="6_i8e85"]
 [ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
@@ -307,6 +309,20 @@ sources/0 = SubResource("TileSetAtlasSource_bfi1g")
 [node name="IsometricTest" type="Node2D"]
 y_sort_enabled = true
 
+[node name="GoDeeperQuest" type="Node" parent="." node_paths=PackedStringArray("quest_giver_npc")]
+script = ExtResource("5_dkmqc")
+quest_name = "Go Even Deeper"
+quest_id = "go_even_deeper"
+quest_description = "Go even deeper inside Zero Two."
+quest_giver_npc = NodePath("../Zero Two NPC")
+
+[node name="FindTheKeyQuest" type="Node" parent="." node_paths=PackedStringArray("quest_giver_npc")]
+script = ExtResource("5_dkmqc")
+quest_name = "Find Rem's Key"
+quest_id = "find_rems_key"
+quest_description = "Find the key to Roswall's mansion for Rem."
+quest_giver_npc = NodePath("../Rem NPC")
+
 [node name="EventArea_R2" parent="." instance=ExtResource("1_w2rhd")]
 position = Vector2(-105, 85)
 scale = Vector2(2, 2)
@@ -321,45 +337,98 @@ event_area_name = "Room 1"
 z_index = 1
 position = Vector2(1, 16)
 
-[node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue") instance=ExtResource("3_6spts")]
+[node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(-176, 89)
 npc_name = "Rem"
-npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1")]
+npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("AcceptedKeyQuest_DialogueTree"), NodePath("CompletedKeyQuest_DialogueTree")]
 
-[node name="DialogueItem0" type="Node" parent="Rem NPC"]
+[node name="BaseDialogueTree" type="Node" parent="Rem NPC"]
+script = ExtResource("5_dod1e")
+
+[node name="DialogueItem1" type="Node" parent="Rem NPC/BaseDialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Rem"
-text = "No matter what painful things happens, even when it looks like you'll lose... when no one else in the world believes in you... when you don't even believe in yourself... I will believe in you!"
+text = "I lost the key to Roswall's mansion. I'm in deep trouble if I don't get it back."
 
-[node name="DialogueItem1" type="Node" parent="Rem NPC"]
+[node name="DialogueItem2" type="Node" parent="Rem NPC/BaseDialogueTree" node_paths=PackedStringArray("quest_if_top_choice")]
 script = ExtResource("4_gnl7v")
 speaker_name = "Rem"
-text = "I believe praying to ask for a favor is arrogant. Prayer should be for seeking forgiveness."
+text = "Would you be willing to find the key for me?"
+is_making_choice = true
+top_choice_text = "Yes"
+bottom_choice_text = "No"
+quest_if_top_choice = NodePath("../../../FindTheKeyQuest")
 
-[node name="Zero Two NPC" parent="." node_paths=PackedStringArray("npc_dialogue") instance=ExtResource("3_6spts")]
+[node name="AcceptedKeyQuest_DialogueTree" type="Node" parent="Rem NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "find_rems_key_accepted"
+
+[node name="DialogueItem" type="Node" parent="Rem NPC/AcceptedKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Rem"
+text = "I hope you find the key soon, otherwise Roswall will punish me."
+
+[node name="DialogueItem2" type="Node" parent="Rem NPC/AcceptedKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hero"
+text = "Don't worry, I'm going to find the key for you."
+
+[node name="CompletedKeyQuest_DialogueTree" type="Node" parent="Rem NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "find_rems_key_completed"
+
+[node name="DialogueItem" type="Node" parent="Rem NPC/CompletedKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Rem"
+text = "Thank you so much for finding the key! You're my hero!"
+
+[node name="DialogueItem2" type="Node" parent="Rem NPC/CompletedKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hero"
+text = "Helping a person in need is common sense!"
+
+[node name="Zero Two NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(113, 73)
 npc_name = "Zero Two"
-npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1"), NodePath("DialogueItem2_Quest")]
+npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("GoDeeperAcceptedDialogueTree")]
 
-[node name="DialogueItem0" type="Node" parent="Zero Two NPC"]
+[node name="BaseDialogueTree" type="Node" parent="Zero Two NPC"]
+script = ExtResource("5_dod1e")
+
+[node name="DialogueItem0" type="Node" parent="Zero Two NPC/BaseDialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Zero Two"
 text = "Let me get a taste of you. After all...you are now my darling!"
 
-[node name="DialogueItem1" type="Node" parent="Zero Two NPC"]
+[node name="DialogueItem1" type="Node" parent="Zero Two NPC/BaseDialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Hiro"
 text = "I feel myself going deeper inside you!"
 
-[node name="DialogueItem2_Quest" type="Node" parent="Zero Two NPC"]
+[node name="DialogueItem2_Quest" type="Node" parent="Zero Two NPC/BaseDialogueTree" node_paths=PackedStringArray("quest_if_top_choice")]
 script = ExtResource("4_gnl7v")
 speaker_name = "ZeroTwo"
 text = "How about you go even deeper?"
 is_making_choice = true
 top_choice_text = "Hell Yes!"
 bottom_choice_text = "Fuck No!"
+quest_if_top_choice = NodePath("../../../GoDeeperQuest")
+
+[node name="GoDeeperAcceptedDialogueTree" type="Node" parent="Zero Two NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "go_even_deeper_accepted"
+
+[node name="DialogueItem0" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Zero Two"
+text = "Hurry up and go even deeper!"
+
+[node name="DialogueItem1" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hiro"
+text = "I - I'm not ready yet!"
 
 [node name="MapTilemap_Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true
@@ -403,9 +472,11 @@ tile_map_data = PackedByteArray("AAD4/wwAAAAAAAAAAAD4/w0AAAAAAAAAAAD5/w4AAAAAAAA
 tile_set = SubResource("TileSet_v4xmn")
 script = ExtResource("5_i7fg0")
 
-[node name="InteractableObject" parent="." instance=ExtResource("6_i8e85")]
+[node name="Rem\'s Key" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("6_i8e85")]
 position = Vector2(-48, 24)
-object_name = "Key"
+object_name = "Rem's Key"
+picking_up_completes_quest = true
+quest = NodePath("../FindTheKeyQuest")
 
 [node name="UI" type="CanvasLayer" parent="."]
 scale = Vector2(0.981712, 1)

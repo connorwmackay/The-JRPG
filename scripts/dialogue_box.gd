@@ -95,4 +95,10 @@ func _on_dialogue_choice_bottom_pressed() -> void:
 func _on_dialogue_choice_top_pressed() -> void:
 	is_making_choice = false
 	hide_choices()
+	
+	var quest = dialogue_queue[0].quest_if_top_choice
+	if quest != null:
+		quest.accept()
+		$"/root/QuestSystem".quests.append(quest)
+		
 	dialogue_queue.remove_at(0)
