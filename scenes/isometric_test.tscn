@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=13 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
+[ext_resource type="Script" path="res://dialogue_item.gd" id="4_gnl7v"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
 [ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_object.tscn" id="6_i8e85"]
 [ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
@@ -320,29 +321,37 @@ event_area_name = "Room 1"
 z_index = 1
 position = Vector2(1, 16)
 
-[node name="Rem NPC" parent="." instance=ExtResource("3_6spts")]
+[node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue") instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(-176, 89)
 npc_name = "Rem"
-npc_dialogue = Array[Dictionary]([{
-"name": "Rem",
-"text": "No matter what painful things happens, even when it looks like you'll lose... when no one else in the world believes in you... when you don't even believe in yourself... I will believe in you!"
-}, {
-"name": "Rem",
-"text": "I believe praying to ask for a favor is arrogant. Prayer should be for seeking forgiveness."
-}])
+npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1")]
 
-[node name="Zero Two NPC" parent="." instance=ExtResource("3_6spts")]
+[node name="DialogueItem0" type="Node" parent="Rem NPC"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Rem"
+text = "No matter what painful things happens, even when it looks like you'll lose... when no one else in the world believes in you... when you don't even believe in yourself... I will believe in you!"
+
+[node name="DialogueItem1" type="Node" parent="Rem NPC"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Rem"
+text = "I believe praying to ask for a favor is arrogant. Prayer should be for seeking forgiveness."
+
+[node name="Zero Two NPC" parent="." node_paths=PackedStringArray("npc_dialogue") instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(113, 73)
 npc_name = "Zero Two"
-npc_dialogue = Array[Dictionary]([{
-"name": "Zero Two",
-"text": "Let me get a taste of you. After all...you are now my darling!"
-}, {
-"name": "Hiro",
-"text": "I feel myself going deeper inside you!"
-}])
+npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1")]
+
+[node name="DialogueItem0" type="Node" parent="Zero Two NPC"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Zero Two"
+text = "Let me get a taste of you. After all...you are now my darling!"
+
+[node name="DialogueItem1" type="Node" parent="Zero Two NPC"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hiro"
+text = "I feel myself going deeper inside you!"
 
 [node name="MapTilemap_Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true
