@@ -17,4 +17,9 @@ func _ready() -> void:
 
 
 func player_interaction():
-	get_tree().get_first_node_in_group("dialogue_box").queue_dialogue(DialogueItem.create("Hero", "Found a " + object_name + "!"))
+	get_tree().get_first_node_in_group("dialogue_box").queue_dialogue(
+		DialogueItem.create("Hero", "Found a " + object_name + "!")
+	)
+	get_tree().get_first_node_in_group("dialogue_box").queue_dialogue(
+		DialogueItem.create("Hero", "Should I pick it up?", true, "Yes", "No")
+	)

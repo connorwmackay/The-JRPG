@@ -341,7 +341,7 @@ text = "I believe praying to ask for a favor is arrogant. Prayer should be for s
 z_index = 1
 position = Vector2(113, 73)
 npc_name = "Zero Two"
-npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1")]
+npc_dialogue = [NodePath("DialogueItem0"), NodePath("DialogueItem1"), NodePath("DialogueItem2_Quest")]
 
 [node name="DialogueItem0" type="Node" parent="Zero Two NPC"]
 script = ExtResource("4_gnl7v")
@@ -352,6 +352,14 @@ text = "Let me get a taste of you. After all...you are now my darling!"
 script = ExtResource("4_gnl7v")
 speaker_name = "Hiro"
 text = "I feel myself going deeper inside you!"
+
+[node name="DialogueItem2_Quest" type="Node" parent="Zero Two NPC"]
+script = ExtResource("4_gnl7v")
+speaker_name = "ZeroTwo"
+text = "How about you go even deeper?"
+is_making_choice = true
+top_choice_text = "Hell Yes!"
+bottom_choice_text = "Fuck No!"
 
 [node name="MapTilemap_Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true

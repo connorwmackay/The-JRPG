@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdjj06kjr8d51"]
+
+[ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_u0a1f"]
+
+[node name="DialogueChoice" type="Button"]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -430.0
+offset_bottom = -318.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u0a1f")
+text = "Yes"
