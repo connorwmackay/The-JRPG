@@ -39,6 +39,7 @@ autowrap_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(420, 128)
+layout_mode = 0
 offset_right = 420.0
 offset_bottom = 128.0
 scale = Vector2(1, 0.970967)

@@ -7,13 +7,11 @@ var dialogue_queue: Array = []
 
 var prev_dq_len = -1
 var player: PlayerController = null
-var is_scrolling: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	dialogue_queue = []
-	is_scrolling = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -22,8 +20,10 @@ func _process(delta: float) -> void:
 		prev_dq_len = len(dialogue_queue)
 	
 	if Input.is_action_just_pressed("dialogue_continue"):
-		dialogue_queue.remove_at(0)
-		is_scrolling = false
+		if text_label.visible_characters < len(text_label.text):
+			text_label.visible_characters = len(text_label.text)
+		else:
+			dialogue_queue.remove_at(0)
 
 func update_dialogue():
 	if len(dialogue_queue) == 0:
