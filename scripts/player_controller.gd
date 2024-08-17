@@ -16,11 +16,22 @@ func _ready():
 	freeze_mode = RigidBody2D.FREEZE_MODE_KINEMATIC
 	set_lock_rotation_enabled(true)
 	
-	is_locked = false
+	unlock()
 
+func lock():
+	is_locked = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func unlock():
+	is_locked = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if Input.is_action_just_pressed("quit_game"):
+		get_tree().quit()
+	
 	if is_locked:
 		return
 	

@@ -42,12 +42,12 @@ func update_dialogue():
 	if len(dialogue_queue) == 0:
 		is_making_choice = false
 		hide_choices()
-		player.is_locked = false
+		player.unlock()
 		visible = false
 	# Lock the player, show this dialogue box and start the first piece
 	# of dialogue.
 	else:
-		player.is_locked = true
+		player.lock()
 		visible = true
 		name_label.text = dialogue_queue[0].speaker_name
 		text_label.text = dialogue_queue[0].text

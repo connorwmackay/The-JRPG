@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://scripts/event_area.gd" id="1_latwx"]
 
 [node name="EventArea" type="Area2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_latwx")
 event_area_name = null
 
