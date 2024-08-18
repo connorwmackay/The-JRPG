@@ -51,9 +51,11 @@ func update_dialogue():
 		visible = true
 		name_label.text = dialogue_queue[0].speaker_name
 		text_label.text = dialogue_queue[0].text
-		if dialogue_queue[0].is_making_choice:
+		if dialogue_queue[0] is DialogueQuestRequest:
 			is_making_choice = true
 			show_choices(dialogue_queue[0].top_choice_text, dialogue_queue[0].bottom_choice_text)
+		elif dialogue_queue[0] is DialogueCompleteQuest:
+			dialogue_queue[0].quest.complete()
 		
 		text_label.visible_characters = 1
 		scroll_text()
@@ -96,9 +98,10 @@ func _on_dialogue_choice_top_pressed() -> void:
 	is_making_choice = false
 	hide_choices()
 	
-	var quest = dialogue_queue[0].quest_if_top_choice
-	if quest != null:
-		quest.accept()
-		$"/root/QuestSystem".quests.append(quest)
+	if dialogue_queue[0] is DialogueQuestRequest:
+		var quest = dialogue_queue[0].quest_if_top_choice
+		if quest != null:
+			quest.accept()
+			$"/root/QuestSystem".quests.append(quest)
 		
 	dialogue_queue.remove_at(0)

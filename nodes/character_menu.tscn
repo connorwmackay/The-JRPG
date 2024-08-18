@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct8ddlef30cms"]
+
+[ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_pvbej"]
+[ext_resource type="Script" path="res://scripts/character_menu.gd" id="2_tv4fl"]
+[ext_resource type="Script" path="res://nodes/quest_list.gd" id="3_qsgjo"]
+[ext_resource type="ButtonGroup" uid="uid://ldo0mul5ogak" path="res://new_button_group.tres" id="4_llwot"]
+
+[node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list")]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pvbej")
+script = ExtResource("2_tv4fl")
+quest_list = NodePath("VBoxContainer/TabContainer/Quests/HBoxContainer/ScrollContainer/QuestList")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 512.0
+offset_bottom = 300.0
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Quests" type="Control" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Quests"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 475.0
+offset_bottom = 233.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Quests/HBoxContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="QuestList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Quests/HBoxContainer/ScrollContainer" node_paths=PackedStringArray("quest_status", "quest_description")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_qsgjo")
+btn_group = ExtResource("4_llwot")
+quest_status = NodePath("../../QuestInfo/QuestStatus")
+quest_description = NodePath("../../QuestInfo/QuestDescription")
+
+[node name="QuestInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Quests/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuestStatus" type="Label" parent="VBoxContainer/TabContainer/Quests/HBoxContainer/QuestInfo"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 21
+
+[node name="QuestDescription" type="Label" parent="VBoxContainer/TabContainer/Quests/HBoxContainer/QuestInfo"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+text = "
+"
+autowrap_mode = 2
+
+[node name="Character" type="Control" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Character"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 19.0
+text = "Character stats"
+
+[node name="Inventory" type="Control" parent="VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Inventory"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 19.0
+text = "Items"
