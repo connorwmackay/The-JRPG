@@ -426,7 +426,7 @@ script = ExtResource("4_gnl7v")
 speaker_name = "Zero Two"
 text = "Hurry up and go even deeper!"
 
-[node name="DialogueItem1" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree" node_paths=PackedStringArray("quest")]
+[node name="Dialogue_QuestCompletion" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree" node_paths=PackedStringArray("quest")]
 script = ExtResource("7_nyxv3")
 quest = NodePath("../../../GoDeeperQuest")
 speaker_name = "Hero"
