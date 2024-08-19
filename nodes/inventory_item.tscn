@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://c3pdy2yj5i3xc"]
+
+[ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_74vuh"]
+[ext_resource type="Texture2D" uid="uid://c2efq6ev5eb23" path="res://ui/Complete_GUI_Essential_Pack_Free_Version/01_Basic_Collection/01_Flat_Theme/Sprites/UI_Flat_Frame_01_Inward.png" id="2_7h5hu"]
+[ext_resource type="Texture2D" uid="uid://ch6mgpi5wddvq" path="res://icon.svg" id="4_8of0v"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwa81"]
+texture = ExtResource("2_7h5hu")
+modulate_color = Color(0.337255, 0.337255, 0.337255, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbc31"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6jfq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f8s8u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l1evs"]
+texture = ExtResource("2_7h5hu")
+modulate_color = Color(0.337255, 0.337255, 0.337255, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckiol"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w82op"]
+texture = ExtResource("2_7h5hu")
+modulate_color = Color(0.336608, 0.336608, 0.336608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpg82"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_blf8e"]
+texture = ExtResource("2_7h5hu")
+modulate_color = Color(0.337255, 0.337255, 0.337255, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btuyh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6qjeq"]
+
+[node name="InventoryItem" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_74vuh")
+theme_override_styles/focus = SubResource("StyleBoxTexture_qwa81")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_kbc31")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_x6jfq")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_f8s8u")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_l1evs")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_ckiol")
+theme_override_styles/hover = SubResource("StyleBoxTexture_w82op")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bpg82")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_blf8e")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_btuyh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6qjeq")
+toggle_mode = true
+action_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 58.0
+offset_bottom = 79.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+z_index = 1
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+texture = ExtResource("4_8of0v")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Rem's Key"
+horizontal_alignment = 1

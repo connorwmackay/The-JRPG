@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
 [ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_item.tscn" id="6_i8e85"]
 [ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
-[ext_resource type="Script" path="res://dialogue_quest_request.gd" id="7_klnrh"]
-[ext_resource type="Script" path="res://dialogue_complete_quest.gd" id="7_nyxv3"]
+[ext_resource type="Script" path="res://scripts/dialogue_quest_request.gd" id="7_klnrh"]
+[ext_resource type="Script" path="res://scripts/dialogue_complete_quest.gd" id="7_nyxv3"]
 [ext_resource type="PackedScene" uid="uid://ct8ddlef30cms" path="res://nodes/character_menu.tscn" id="11_mfkcf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
