@@ -22,7 +22,7 @@ modulate_color = Color(0.337255, 0.337255, 0.337255, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w82op"]
 texture = ExtResource("2_7h5hu")
-modulate_color = Color(0.336608, 0.336608, 0.336608, 1)
+modulate_color = Color(0.621524, 0.621524, 0.621524, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpg82"]
 

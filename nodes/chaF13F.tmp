@@ -2,13 +2,12 @@
 
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_pvbej"]
 [ext_resource type="Script" path="res://scripts/character_menu.gd" id="2_tv4fl"]
+[ext_resource type="Script" path="res://scripts/item_list.gd" id="3_00bnu"]
 [ext_resource type="Script" path="res://scripts/quest_list.gd" id="3_qsgjo"]
-[ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_22j8x"]
+[ext_resource type="ButtonGroup" uid="uid://ldo0mul5ogak" path="res://ui/quest_button_group.tres" id="4_llwot"]
 [ext_resource type="Texture2D" uid="uid://ch6mgpi5wddvq" path="res://icon.svg" id="5_xq3em"]
 [ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="5_y6p5x"]
 [ext_resource type="ButtonGroup" uid="uid://dfylfkytcd0b4" path="res://ui/inventory_button_group.tres" id="7_7xtjp"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_yueu1"]
 
 [node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list")]
 z_index = 4096
@@ -37,7 +36,7 @@ layout_mode = 2
 script = ExtResource("3_qsgjo")
 quest_status = NodePath("HBoxContainer/QuestInfo/QuestStatus")
 quest_description = NodePath("HBoxContainer/QuestInfo/QuestDescription")
-quest_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+quest_scroll_list = NodePath("HBoxContainer/QuestScrollList")
 metadata/_tab_index = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Quests"]
@@ -46,10 +45,10 @@ offset_left = 5.0
 offset_right = 475.0
 offset_bottom = 233.0
 
-[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Quests/HBoxContainer" instance=ExtResource("4_22j8x")]
+[node name="QuestScrollList" type="Control" parent="VBoxContainer/TabContainer/Quests/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_yueu1")
+script = ExtResource("3_00bnu")
+btn_group = ExtResource("4_llwot")
 
 [node name="QuestInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Quests/HBoxContainer"]
 layout_mode = 2
