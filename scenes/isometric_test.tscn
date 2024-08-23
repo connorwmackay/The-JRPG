@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=19 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
+[ext_resource type="Script" path="res://item_fetch_quest.gd" id="2_mb4d7"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
 [ext_resource type="Script" path="res://scripts/dialogue_item.gd" id="4_gnl7v"]
@@ -319,11 +320,13 @@ quest_id = "go_even_deeper"
 quest_description = "Go even deeper inside Zero Two."
 quest_giver_npc = NodePath("../Zero Two NPC")
 
-[node name="FindTheKeyQuest" type="Node" parent="." node_paths=PackedStringArray("quest_giver_npc")]
-script = ExtResource("5_dkmqc")
+[node name="FindTheKey_ItemFetchQuest" type="Node" parent="." node_paths=PackedStringArray("item", "quest_giver_npc")]
+script = ExtResource("2_mb4d7")
+item = NodePath("../RemsKey_InteractableQuestItem")
+description_if_item_found = "Give the key to Rem."
 quest_name = "Find Rem's Key"
 quest_id = "find_rems_key"
-quest_description = "Find the key to Roswall's mansion for Rem and give it to her."
+quest_description = "Find Rem's key to Roswall's mansion."
 quest_giver_npc = NodePath("../Rem NPC")
 
 [node name="EventArea_R2" parent="." instance=ExtResource("1_w2rhd")]
@@ -340,9 +343,9 @@ event_area_name = "Room 1"
 z_index = 1
 position = Vector2(1, 16)
 
-[node name="RemsKey_InteractableItem" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("9_aawrm")]
+[node name="RemsKey_InteractableQuestItem" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("9_aawrm")]
 position = Vector2(-48, 24)
-quest = NodePath("../FindTheKeyQuest")
+quest = NodePath("../FindTheKey_ItemFetchQuest")
 interaction_quest_accepted_dialogue = "I found Rem's key! I should give it to her."
 item_name = "Rem's Key"
 item_description = "Rem's key to Roswall's mansion."
@@ -352,7 +355,7 @@ interaction_dialogue = "Looks like someone lost their key, I should leave it her
 z_index = 1
 position = Vector2(-176, 89)
 npc_name = "Rem"
-npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("AcceptedKeyQuest_DialogueTree"), NodePath("CompletedKeyQuest_DialogueTree")]
+npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("AcceptedKeyQuest_DialogueTree"), NodePath("CompletedKeyQuest_DialogueTree"), NodePath("FoundKeyQuest_DialogueTree")]
 
 [node name="BaseDialogueTree" type="Node" parent="Rem NPC"]
 script = ExtResource("5_dod1e")
@@ -366,7 +369,7 @@ text = "I lost the key to Roswall's mansion. I'm in deep trouble if I don't get 
 script = ExtResource("7_klnrh")
 top_choice_text = "Yes"
 bottom_choice_text = "No"
-quest_if_top_choice = NodePath("../../../FindTheKeyQuest")
+quest_if_top_choice = NodePath("../../../FindTheKey_ItemFetchQuest")
 speaker_name = "Rem"
 text = "Would you be willing to find the key for me?"
 
@@ -384,6 +387,26 @@ script = ExtResource("4_gnl7v")
 speaker_name = "Hero"
 text = "Don't worry, I'm going to find the key for you."
 
+[node name="FoundKeyQuest_DialogueTree" type="Node" parent="Rem NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "find_rems_key_found"
+
+[node name="DialogueItem" type="Node" parent="Rem NPC/FoundKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hero"
+text = "I found the key you were looking for."
+
+[node name="DialogueCompleteQuest" type="Node" parent="Rem NPC/FoundKeyQuest_DialogueTree" node_paths=PackedStringArray("quest")]
+script = ExtResource("7_nyxv3")
+quest = NodePath("../../../FindTheKey_ItemFetchQuest")
+speaker_name = "Rem"
+text = "You did? Thank you so much, you're my hero!"
+
+[node name="DialogueItem2" type="Node" parent="Rem NPC/FoundKeyQuest_DialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hero"
+text = "Helping a person in need is common sense!"
+
 [node name="CompletedKeyQuest_DialogueTree" type="Node" parent="Rem NPC"]
 script = ExtResource("5_dod1e")
 tree_name = "find_rems_key_completed"
@@ -391,12 +414,12 @@ tree_name = "find_rems_key_completed"
 [node name="DialogueItem" type="Node" parent="Rem NPC/CompletedKeyQuest_DialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Rem"
-text = "Thank you so much for finding the key! You're my hero!"
+text = "Now that I have my key, I can return to Roswall's mansion."
 
 [node name="DialogueItem2" type="Node" parent="Rem NPC/CompletedKeyQuest_DialogueTree"]
 script = ExtResource("4_gnl7v")
-speaker_name = "Hero"
-text = "Helping a person in need is common sense!"
+speaker_name = "Rem"
+text = "You should visit the mansion, I'll make sure Roswall knows you are a dependable person."
 
 [node name="Zero Two NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1

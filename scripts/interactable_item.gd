@@ -8,6 +8,8 @@ class_name InteractableItem
 
 var allows_interaction: bool = true
 
+signal found()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Setup contact monitoring
@@ -22,6 +24,7 @@ func _ready() -> void:
 
 func add_item_to_inventory():
 	$"/root/InventorySystem".inventory.append(self)
+	found.emit()
 	allows_interaction = false
 	visible = false
 

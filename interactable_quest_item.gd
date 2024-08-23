@@ -15,7 +15,6 @@ func player_interaction():
 		get_tree().get_first_node_in_group("dialogue_box").queue_dialogue(
 			DialogueItem.create("Hero", interaction_quest_accepted_dialogue)
 		)
-		quest.complete()
 		$"/root/QuestSystem".notify_quest_update()
 		add_item_to_inventory()
 	elif quest.status == Quest.QuestStatus.NotAccepted:

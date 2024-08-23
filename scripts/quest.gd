@@ -32,13 +32,3 @@ func complete():
 func fail():
 	quest_giver_npc.current_dialogue_tree_name = quest_id + "_failed"
 	status = QuestStatus.Failed
-
-## Creates an instance of this class
-static func create(new_quest_name: String, new_quest_id: String, new_quest_description: String, new_status: QuestStatus, new_quest_giver_npc: NPCController = null):
-	var inst = Quest.new()
-	inst.quest_id = new_quest_id
-	inst.quest_name = new_quest_name
-	inst.quest_description = new_quest_description
-	inst.status = new_status
-	inst.quest_giver_npc = new_quest_giver_npc
-	return inst
