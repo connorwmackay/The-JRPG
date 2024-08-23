@@ -8,10 +8,10 @@
 [ext_resource type="Script" path="res://scripts/quest.gd" id="5_dkmqc"]
 [ext_resource type="Script" path="res://scripts/dialogue_tree.gd" id="5_dod1e"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
-[ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_item.tscn" id="6_i8e85"]
 [ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
 [ext_resource type="Script" path="res://scripts/dialogue_quest_request.gd" id="7_klnrh"]
 [ext_resource type="Script" path="res://scripts/dialogue_complete_quest.gd" id="7_nyxv3"]
+[ext_resource type="PackedScene" uid="uid://oi4ktd4s2cxc" path="res://nodes/interactable_quest_item.tscn" id="9_aawrm"]
 [ext_resource type="PackedScene" uid="uid://ct8ddlef30cms" path="res://nodes/character_menu.tscn" id="11_mfkcf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
@@ -340,6 +340,14 @@ event_area_name = "Room 1"
 z_index = 1
 position = Vector2(1, 16)
 
+[node name="RemsKey_InteractableItem" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("9_aawrm")]
+position = Vector2(-48, 24)
+quest = NodePath("../FindTheKeyQuest")
+interaction_quest_accepted_dialogue = "I found Rem's key! I should give it to her."
+item_name = "Rem's Key"
+item_description = "Rem's key to Roswall's mansion."
+interaction_dialogue = "Looks like someone lost their key, I should leave it here so they can find it."
+
 [node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1
 position = Vector2(-176, 89)
@@ -473,12 +481,6 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAD4/wwAAAAAAAAAAAD4/w0AAAAAAAAAAAD5/w4AAAAAAAAAAAD5/w8AAAAAAAAAAAD6/xAAAAAAAAAAAAD6/xEAAAAAAAAAAAD7/xIAAAAAAAAAAAD+/wwAAAAAAAAAAAD9/w0AAAAAAAAAAAD9/w4AAAAAAAAAAAD8/w8AAAAAAAAAAAD8/xAAAAAAAAAAAAD7/xEAAAAAAAAAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD7/wcAAAAAAAAAAAD7/wYAAAAAAAAAAAD///3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAEAAsAAAAAAAAAAAAEAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAACAA8AAAAAAAAAAAACABAAAAAAAAAAAAABABEAAAAAAAAAAAABABIAAAAAAAAAAAD+/w0AAAAAAAAAAAD//w4AAAAAAAAAAAD//w8AAAAAAAAAAAAAABAAAAAAAAAAAAAAABEAAAAAAAAAAAD//wkAAAAAAAAAAAD//woAAAAAAAAAAAD+/wsAAAAAAAAAAAACAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAD///z/AAAAAAAAAAD+//3/AAAAAAAAAAD+//7/AAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD7/wMAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD5/wcAAAAAAAAAAAD5/wgAAAAAAAAAAAD4/wkAAAAAAAAAAAD4/woAAAAAAAAAAAD3/wsAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_v4xmn")
 script = ExtResource("5_i7fg0")
-
-[node name="Rem\'s Key" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("6_i8e85")]
-position = Vector2(-48, 24)
-object_name = "Rem's Key"
-picking_up_completes_quest = true
-quest = NodePath("../FindTheKeyQuest")
 
 [node name="UI" type="CanvasLayer" parent="."]
 scale = Vector2(0.981712, 1)

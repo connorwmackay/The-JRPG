@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://oi4ktd4s2cxc"]
+
+[ext_resource type="PackedScene" uid="uid://4u1bci1w4gy2" path="res://nodes/interactable_item.tscn" id="1_ifiak"]
+[ext_resource type="Script" path="res://interactable_quest_item.gd" id="2_v6es2"]
+
+[node name="InteractableItem" instance=ExtResource("1_ifiak")]
+script = ExtResource("2_v6es2")
+interaction_quest_accepted_dialogue = ""

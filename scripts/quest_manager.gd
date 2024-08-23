@@ -2,16 +2,15 @@ extends Node
 class_name QuestManager
 
 var quests: Array[Quest] = []
-var num_quests: int = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	print("Started quest system...")
-	num_quests = len(quests)
+func add_quest(quest: Quest):
+	notify_quest_update()
+	quests.append(quest)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if len(quests) != num_quests:
-		num_quests = len(quests)
-		print(num_quests)
+func notify_quest_update():
+	var i = 0
+	while i < len(quests):
+		if quests[i].status == Quest.QuestStatus.Completed:
+			quests.remove_at(i)
+			i -= 1
+		i += 1

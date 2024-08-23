@@ -56,6 +56,7 @@ func update_dialogue():
 			show_choices(dialogue_queue[0].top_choice_text, dialogue_queue[0].bottom_choice_text)
 		elif dialogue_queue[0] is DialogueCompleteQuest:
 			dialogue_queue[0].quest.complete()
+			$"/root/QuestSystem".notify_quest_update()
 		
 		text_label.visible_characters = 1
 		scroll_text()
@@ -102,6 +103,6 @@ func _on_dialogue_choice_top_pressed() -> void:
 		var quest = dialogue_queue[0].quest_if_top_choice
 		if quest != null:
 			quest.accept()
-			$"/root/QuestSystem".quests.append(quest)
+			$"/root/QuestSystem".add_quest(quest)
 		
 	dialogue_queue.remove_at(0)

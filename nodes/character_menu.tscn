@@ -1,16 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct8ddlef30cms"]
+[gd_scene load_steps=8 format=3 uid="uid://ct8ddlef30cms"]
 
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_pvbej"]
 [ext_resource type="Script" path="res://scripts/character_menu.gd" id="2_tv4fl"]
 [ext_resource type="Script" path="res://scripts/quest_list.gd" id="3_qsgjo"]
 [ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_22j8x"]
-[ext_resource type="Texture2D" uid="uid://ch6mgpi5wddvq" path="res://icon.svg" id="5_xq3em"]
 [ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="5_y6p5x"]
-[ext_resource type="ButtonGroup" uid="uid://dfylfkytcd0b4" path="res://ui/inventory_button_group.tres" id="7_7xtjp"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_yueu1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_8jxpo"]
 
-[node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list")]
+[sub_resource type="ButtonGroup" id="ButtonGroup_1tgvo"]
+
+[node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list", "inventory_ui")]
 z_index = 4096
 layout_mode = 3
 anchors_preset = 15
@@ -21,6 +21,7 @@ grow_vertical = 2
 theme = ExtResource("1_pvbej")
 script = ExtResource("2_tv4fl")
 quest_list = NodePath("VBoxContainer/TabContainer/Quests")
+inventory_ui = NodePath("VBoxContainer/TabContainer/Inventory")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -49,7 +50,9 @@ offset_bottom = 233.0
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Quests/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_yueu1")
+btn_group = SubResource("ButtonGroup_8jxpo")
+scroll_container_size = Vector2(233, 233)
+minimum_button_size = Vector2(220, 0)
 
 [node name="QuestInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Quests/HBoxContainer"]
 layout_mode = 2
@@ -82,30 +85,30 @@ offset_right = 40.0
 offset_bottom = 19.0
 text = "Character stats"
 
-[node name="Inventory" type="Control" parent="VBoxContainer/TabContainer"]
+[node name="Inventory" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_name", "item_description")]
 visible = false
+z_index = 1
 layout_mode = 2
+script = ExtResource("5_y6p5x")
+item_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+item_name = NodePath("HBoxContainer/ItemInfo/ItemName")
+item_description = NodePath("HBoxContainer/ItemInfo/ItemDescription")
 metadata/_tab_index = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Inventory"]
+clip_contents = true
 layout_mode = 0
 offset_left = 5.0
 offset_right = 475.0
 offset_bottom = 233.0
 theme_override_constants/separation = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer"]
+[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="ItemsGrid" type="GridContainer" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-columns = 3
-script = ExtResource("5_y6p5x")
-default_item_img = ExtResource("5_xq3em")
-btn_group = ExtResource("7_7xtjp")
+btn_group = SubResource("ButtonGroup_1tgvo")
+scroll_container_size = Vector2(231, 233)
+minimum_button_size = Vector2(220, 0)
 
 [node name="ItemInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer"]
 layout_mode = 2
