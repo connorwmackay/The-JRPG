@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_22j8x"]
 [ext_resource type="Script" path="res://scripts/inventory_ui.gd" id="5_y6p5x"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_8jxpo"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_6l2pj"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_1tgvo"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_ovcm0"]
 
 [node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list", "inventory_ui")]
 z_index = 4096
@@ -50,7 +50,7 @@ offset_bottom = 233.0
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Quests/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_8jxpo")
+btn_group = SubResource("ButtonGroup_6l2pj")
 scroll_container_size = Vector2(233, 233)
 minimum_button_size = Vector2(220, 0)
 
@@ -106,7 +106,7 @@ theme_override_constants/separation = 8
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_1tgvo")
+btn_group = SubResource("ButtonGroup_ovcm0")
 scroll_container_size = Vector2(231, 233)
 minimum_button_size = Vector2(220, 0)
 
