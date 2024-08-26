@@ -1,14 +1,15 @@
-[gd_scene load_steps=19 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=20 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
-[ext_resource type="Script" path="res://item_fetch_quest.gd" id="2_mb4d7"]
+[ext_resource type="Script" path="res://scripts/item_fetch_quest.gd" id="2_mb4d7"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
 [ext_resource type="Script" path="res://scripts/dialogue_item.gd" id="4_gnl7v"]
 [ext_resource type="Script" path="res://scripts/quest.gd" id="5_dkmqc"]
 [ext_resource type="Script" path="res://scripts/dialogue_tree.gd" id="5_dod1e"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
+[ext_resource type="Script" path="res://scripts/item.gd" id="6_hr5v0"]
 [ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
 [ext_resource type="Script" path="res://scripts/dialogue_quest_request.gd" id="7_klnrh"]
 [ext_resource type="Script" path="res://scripts/dialogue_complete_quest.gd" id="7_nyxv3"]
@@ -322,7 +323,7 @@ quest_giver_npc = NodePath("../Zero Two NPC")
 
 [node name="FindTheKey_ItemFetchQuest" type="Node" parent="." node_paths=PackedStringArray("item", "quest_giver_npc")]
 script = ExtResource("2_mb4d7")
-item = NodePath("../RemsKey_InteractableQuestItem")
+item = NodePath("../Rems Key Item")
 description_if_item_found = "Give the key to Rem."
 quest_name = "Find Rem's Key"
 quest_id = "find_rems_key"
@@ -343,13 +344,16 @@ event_area_name = "Room 1"
 z_index = 1
 position = Vector2(1, 16)
 
-[node name="RemsKey_InteractableQuestItem" parent="." node_paths=PackedStringArray("quest") instance=ExtResource("9_aawrm")]
-position = Vector2(-48, 24)
+[node name="Rems Key Item" type="Node" parent="."]
+script = ExtResource("6_hr5v0")
+item_name = "Rem's Key"
+item_description = "Rem's key to Roswall's Mansion"
+
+[node name="InteractableItem" parent="." node_paths=PackedStringArray("quest", "item") instance=ExtResource("9_aawrm")]
 quest = NodePath("../FindTheKey_ItemFetchQuest")
 interaction_quest_accepted_dialogue = "I found Rem's key! I should give it to her."
-item_name = "Rem's Key"
-item_description = "Rem's key to Roswall's mansion."
-interaction_dialogue = "Looks like someone lost their key, I should leave it here so they can find it."
+item = NodePath("../Rems Key Item")
+interaction_dialogue = "Hmm, someone los their key. I should leave it here so they can find it."
 
 [node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1

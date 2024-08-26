@@ -1,7 +1,7 @@
 extends Quest
 class_name ItemFetchQuest
 
-@export var item: InteractableItem
+@export var item: Item
 @export var description_if_item_found: String
 
 func _ready() -> void:
