@@ -28,10 +28,6 @@ func unlock():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	if Input.is_action_just_pressed("quit_game"):
-		get_tree().quit()
-	
 	if is_locked:
 		return
 	

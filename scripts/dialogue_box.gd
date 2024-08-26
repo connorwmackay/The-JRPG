@@ -6,6 +6,8 @@ var dialogue_queue: Array[DialogueItem] = []
 @export var scroll_wait_time: float = 0.3
 @export var top_dialogue_choice: Button
 @export var bottom_dialogue_choice: Button
+@export var shop_menu: ShopMenu
+@export var character_menu: CharacterMenu
 
 var prev_dq_len = -1
 var player: PlayerController = null
@@ -33,13 +35,17 @@ func _process(delta: float) -> void:
 		if text_label.visible_characters < len(text_label.text):
 			text_label.visible_characters = len(text_label.text)
 		elif not is_making_choice:
-			dialogue_queue.remove_at(0)
+			if len(dialogue_queue) > 0:
+				if dialogue_queue[0] is DialogueShowShop:
+					shop_menu.update_and_show_shop_menu(dialogue_queue[0].buyable_items)
+				dialogue_queue.remove_at(0)
 
 # Update the dialogue box
 func update_dialogue():
 	# If there is no dialogue queued, unlock the player and 
 	# make hide this dialogue box.
 	if len(dialogue_queue) == 0:
+		character_menu.can_open = true
 		is_making_choice = false
 		hide_choices()
 		player.unlock()
@@ -47,6 +53,7 @@ func update_dialogue():
 	# Lock the player, show this dialogue box and start the first piece
 	# of dialogue.
 	else:
+		character_menu.can_open = false
 		player.lock()
 		visible = true
 		name_label.text = dialogue_queue[0].speaker_name

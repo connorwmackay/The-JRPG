@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=3 uid="uid://uo1x05mg4tmv"]
+
+[ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_dtg8v"]
+[ext_resource type="Script" path="res://scripts/shop_menu.gd" id="2_gu8lg"]
+[ext_resource type="Script" path="res://scripts/shop_buy_ui.gd" id="3_pol1i"]
+[ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_alty5"]
+[ext_resource type="Script" path="res://scripts/shop_sell_ui.gd" id="6_jm8k6"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_j6t7i"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_t3wuq"]
+
+[node name="ShopMenu" type="Control" node_paths=PackedStringArray("buy_ui", "sell_ui")]
+z_index = 4096
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dtg8v")
+script = ExtResource("2_gu8lg")
+buy_ui = NodePath("VBoxContainer/TabContainer/Buy")
+sell_ui = NodePath("VBoxContainer/TabContainer/Sell")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 300.0
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Buy" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "buy_btn")]
+layout_mode = 2
+script = ExtResource("3_pol1i")
+item_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+item_description = NodePath("HBoxContainer/ItemInfo/ItemDescription")
+item_price = NodePath("HBoxContainer/ItemInfo/ItemPrice")
+buy_btn = NodePath("HBoxContainer/ItemInfo/BuyButton")
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Buy"]
+layout_mode = 0
+offset_left = 5.0
+offset_right = 475.0
+offset_bottom = 233.0
+
+[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Buy/HBoxContainer" instance=ExtResource("4_alty5")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_group = SubResource("ButtonGroup_j6t7i")
+scroll_container_size = Vector2(233, 233)
+minimum_button_size = Vector2(220, 0)
+
+[node name="ItemInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Buy/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ItemPrice" type="Label" parent="VBoxContainer/TabContainer/Buy/HBoxContainer/ItemInfo"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 21
+text = "10 Gold"
+
+[node name="ItemDescription" type="Label" parent="VBoxContainer/TabContainer/Buy/HBoxContainer/ItemInfo"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+text = "A key that unlocks a dungeon."
+autowrap_mode = 2
+
+[node name="BuyButton" type="Button" parent="VBoxContainer/TabContainer/Buy/HBoxContainer/ItemInfo"]
+layout_mode = 2
+focus_mode = 0
+text = "Buy"
+
+[node name="Sell" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "sell_btn")]
+visible = false
+z_index = 1
+layout_mode = 2
+script = ExtResource("6_jm8k6")
+item_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+item_description = NodePath("HBoxContainer/ItemInfo/ItemDescription")
+item_price = NodePath("HBoxContainer/ItemInfo/ItemPrice")
+sell_btn = NodePath("HBoxContainer/ItemInfo/SellButton")
+metadata/_tab_index = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Sell"]
+clip_contents = true
+layout_mode = 0
+offset_left = 5.0
+offset_right = 475.0
+offset_bottom = 233.0
+theme_override_constants/separation = 8
+
+[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Sell/HBoxContainer" instance=ExtResource("4_alty5")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_group = SubResource("ButtonGroup_t3wuq")
+scroll_container_size = Vector2(231, 233)
+minimum_button_size = Vector2(220, 0)
+
+[node name="ItemInfo" type="VBoxContainer" parent="VBoxContainer/TabContainer/Sell/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="ItemPrice" type="Label" parent="VBoxContainer/TabContainer/Sell/HBoxContainer/ItemInfo"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 21
+text = "10 Gold"
+
+[node name="ItemDescription" type="Label" parent="VBoxContainer/TabContainer/Sell/HBoxContainer/ItemInfo"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+text = "The key to Roswall's mansion that Rem has lost."
+autowrap_mode = 3
+
+[node name="SellButton" type="Button" parent="VBoxContainer/TabContainer/Sell/HBoxContainer/ItemInfo"]
+layout_mode = 2
+focus_mode = 0
+text = "Sell"
+
+[connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
