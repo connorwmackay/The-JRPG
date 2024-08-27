@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-QuestSystem="*res://scripts/quest_manager.gd"
-InventorySystem="*res://scripts/inventory_manager.gd"
+QuestSystem="*res://scripts/quest/quest_manager.gd"
+InventorySystem="*res://scripts/inventory/inventory_manager.gd"
 
 [display]
 

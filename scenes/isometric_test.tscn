@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
-[ext_resource type="Script" path="res://scripts/item_fetch_quest.gd" id="2_mb4d7"]
+[ext_resource type="Script" path="res://scripts/quest/item_fetch_quest.gd" id="2_mb4d7"]
 [ext_resource type="PackedScene" uid="uid://ifvmqy654etv" path="res://nodes/npc.tscn" id="3_6spts"]
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
-[ext_resource type="Script" path="res://scripts/dialogue_show_shop.gd" id="4_fc1oq"]
-[ext_resource type="Script" path="res://scripts/dialogue_item.gd" id="4_gnl7v"]
-[ext_resource type="Script" path="res://scripts/quest.gd" id="5_dkmqc"]
-[ext_resource type="Script" path="res://scripts/dialogue_tree.gd" id="5_dod1e"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_show_shop.gd" id="4_fc1oq"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_item.gd" id="4_gnl7v"]
+[ext_resource type="Script" path="res://scripts/quest/quest.gd" id="5_dkmqc"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_tree.gd" id="5_dod1e"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
 [ext_resource type="Script" path="res://tradeable_item.gd" id="5_v08bx"]
-[ext_resource type="Script" path="res://scripts/item.gd" id="6_hr5v0"]
-[ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/dialogue_box.tscn" id="7_i6mmy"]
-[ext_resource type="Script" path="res://scripts/dialogue_quest_request.gd" id="7_klnrh"]
-[ext_resource type="Script" path="res://scripts/dialogue_complete_quest.gd" id="7_nyxv3"]
-[ext_resource type="PackedScene" uid="uid://oi4ktd4s2cxc" path="res://nodes/interactable_quest_item.tscn" id="9_aawrm"]
-[ext_resource type="PackedScene" uid="uid://ct8ddlef30cms" path="res://nodes/character_menu.tscn" id="11_mfkcf"]
-[ext_resource type="PackedScene" uid="uid://uo1x05mg4tmv" path="res://nodes/shop_menu.tscn" id="18_a1du6"]
+[ext_resource type="Script" path="res://scripts/item/item.gd" id="6_hr5v0"]
+[ext_resource type="PackedScene" uid="uid://dibligg2simpg" path="res://nodes/ui/dialogue_box.tscn" id="7_i6mmy"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_quest_request.gd" id="7_klnrh"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_complete_quest.gd" id="7_nyxv3"]
+[ext_resource type="PackedScene" uid="uid://oi4ktd4s2cxc" path="res://nodes/item/interactable_quest_item.tscn" id="9_aawrm"]
+[ext_resource type="PackedScene" uid="uid://ct8ddlef30cms" path="res://nodes/ui/character_menu.tscn" id="11_mfkcf"]
+[ext_resource type="PackedScene" uid="uid://uo1x05mg4tmv" path="res://nodes/ui/shop_menu.tscn" id="18_a1du6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bxi1g"]
 texture = ExtResource("4_2uqo8")
@@ -394,7 +394,7 @@ position = Vector2(-48, 24)
 quest = NodePath("../FindTheKey_ItemFetchQuest")
 interaction_quest_accepted_dialogue = "I found Rem's key! I should give it to her."
 item = NodePath("../Rems Key Item")
-interaction_dialogue = "Hmm, someone los their key. I should leave it here so they can find it."
+interaction_dialogue = "Hmm, someone lost their key. I should leave it here so they can find it."
 
 [node name="Rem NPC" parent="." node_paths=PackedStringArray("npc_dialogue_trees") instance=ExtResource("3_6spts")]
 z_index = 1

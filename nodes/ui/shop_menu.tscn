@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://uo1x05mg4tmv"]
 
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_dtg8v"]
-[ext_resource type="Script" path="res://scripts/shop_menu.gd" id="2_gu8lg"]
-[ext_resource type="Script" path="res://scripts/shop_buy_ui.gd" id="3_pol1i"]
+[ext_resource type="Script" path="res://scripts/shop/shop_menu.gd" id="2_gu8lg"]
+[ext_resource type="Script" path="res://scripts/shop/shop_buy_ui.gd" id="3_pol1i"]
 [ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_alty5"]
-[ext_resource type="Script" path="res://scripts/shop_sell_ui.gd" id="6_jm8k6"]
+[ext_resource type="Script" path="res://scripts/shop/shop_sell_ui.gd" id="6_jm8k6"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_j6t7i"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_ciupd"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_t3wuq"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_rybt6"]
 
 [node name="ShopMenu" type="Control" node_paths=PackedStringArray("buy_ui", "sell_ui")]
 z_index = 4096
@@ -51,7 +51,7 @@ offset_bottom = 233.0
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Buy/HBoxContainer" instance=ExtResource("4_alty5")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_j6t7i")
+btn_group = SubResource("ButtonGroup_ciupd")
 scroll_container_size = Vector2(233, 233)
 minimum_button_size = Vector2(220, 0)
 
@@ -102,7 +102,7 @@ theme_override_constants/separation = 8
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Sell/HBoxContainer" instance=ExtResource("4_alty5")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_t3wuq")
+btn_group = SubResource("ButtonGroup_rybt6")
 scroll_container_size = Vector2(231, 233)
 minimum_button_size = Vector2(220, 0)
 

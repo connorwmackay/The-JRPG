@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1010lbfpec8x"]
 
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_wwevt"]
-[ext_resource type="Script" path="res://scripts/item_list.gd" id="1_wxhbf"]
+[ext_resource type="Script" path="res://scripts/item/item_list.gd" id="1_wxhbf"]
 
 [node name="ItemScrollList" type="Control"]
 z_index = 1

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://wes1ca3e3tn0" path="res://ui/Complete_GUI_Essential_Pack_Free_Version/01_Basic_Collection/01_Flat_Theme/Sprites/UI_Flat_Frame_01_Standard.png" id="1_0bmuv"]
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_0wn7g"]
-[ext_resource type="Script" path="res://scripts/dialogue_box.gd" id="2_f53en"]
-[ext_resource type="PackedScene" uid="uid://cdjj06kjr8d51" path="res://nodes/dialogue_choice.tscn" id="4_uq1nx"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_box.gd" id="2_f53en"]
+[ext_resource type="PackedScene" uid="uid://cdjj06kjr8d51" path="res://nodes/ui/dialogue_choice.tscn" id="4_uq1nx"]
 
 [node name="DialogueBox" type="Control" node_paths=PackedStringArray("name_label", "text_label", "top_dialogue_choice", "bottom_dialogue_choice") groups=["dialogue_box"]]
 z_index = 1000

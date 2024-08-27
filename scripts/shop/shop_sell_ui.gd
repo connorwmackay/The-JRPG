@@ -19,7 +19,7 @@ func update_ui():
 
 func _on_item_selected(item: Item):
 	item_description.text = item.item_description
-	item_price.text = "{price} Gold".format({"price": item.buy_price})
+	item_price.text = "{price} Gold".format({"price": item.sell_price})
 	sell_btn.visible = true
 	sell_btn.pressed.disconnect(self._on_sell_pressed)
 	sell_btn.pressed.connect(_on_sell_pressed.bind(item))
