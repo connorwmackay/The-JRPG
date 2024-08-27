@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 QuestSystem="*res://scripts/quest/quest_manager.gd"
 InventorySystem="*res://scripts/inventory/inventory_manager.gd"
+GoldSystem="*res://scripts/gold_manager.gd"
 
 [display]
 
