@@ -4,6 +4,7 @@ class_name CharacterMenu
 var player: PlayerController
 @export var quest_list: QuestList
 @export var inventory_ui: InventoryUI
+@export var character_ui: CharacterUI
 
 var can_open: bool = true
 
@@ -19,6 +20,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_character_menu") and can_open:
 		quest_list.update_quest_list()
 		inventory_ui.update_inventory()
+		character_ui.update()
 		visible = not visible
 		if player.is_locked:
 			player.unlock()

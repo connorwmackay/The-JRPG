@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct8ddlef30cms"]
+[gd_scene load_steps=9 format=3 uid="uid://ct8ddlef30cms"]
 
 [ext_resource type="Theme" uid="uid://dtmdhdonskdc1" path="res://ui/ui_theme.tres" id="1_pvbej"]
 [ext_resource type="Script" path="res://scripts/character_menu.gd" id="2_tv4fl"]
 [ext_resource type="Script" path="res://scripts/quest/quest_list.gd" id="3_qsgjo"]
 [ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_22j8x"]
+[ext_resource type="Script" path="res://nodes/ui/character_ui.gd" id="5_ifde6"]
 [ext_resource type="Script" path="res://scripts/inventory/inventory_ui.gd" id="5_y6p5x"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ojxww"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_cjyjv"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_1vad1"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_7vm8t"]
 
-[node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list", "inventory_ui")]
+[node name="CharacterMenu" type="Control" node_paths=PackedStringArray("quest_list", "inventory_ui", "character_ui")]
 z_index = 4096
 layout_mode = 3
 anchors_preset = 15
@@ -22,6 +23,7 @@ theme = ExtResource("1_pvbej")
 script = ExtResource("2_tv4fl")
 quest_list = NodePath("VBoxContainer/TabContainer/Quests")
 inventory_ui = NodePath("VBoxContainer/TabContainer/Inventory")
+character_ui = NodePath("VBoxContainer/TabContainer/Character")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -50,7 +52,7 @@ offset_bottom = 233.0
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Quests/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_ojxww")
+btn_group = SubResource("ButtonGroup_cjyjv")
 scroll_container_size = Vector2(233, 233)
 minimum_button_size = Vector2(220, 0)
 
@@ -74,12 +76,14 @@ text = "
 "
 autowrap_mode = 2
 
-[node name="Character" type="Control" parent="VBoxContainer/TabContainer"]
+[node name="Character" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("player_gold_label")]
 visible = false
 layout_mode = 2
+script = ExtResource("5_ifde6")
+player_gold_label = NodePath("PlayerGoldLabel")
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Character"]
+[node name="PlayerGoldLabel" type="Label" parent="VBoxContainer/TabContainer/Character"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 19.0
@@ -106,7 +110,7 @@ theme_override_constants/separation = 8
 [node name="ItemScrollList" parent="VBoxContainer/TabContainer/Inventory/HBoxContainer" instance=ExtResource("4_22j8x")]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_1vad1")
+btn_group = SubResource("ButtonGroup_7vm8t")
 scroll_container_size = Vector2(231, 233)
 minimum_button_size = Vector2(220, 0)
 

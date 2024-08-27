@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b1010lbfpec8x" path="res://nodes/item_scroll_list.tscn" id="4_alty5"]
 [ext_resource type="Script" path="res://scripts/shop/shop_sell_ui.gd" id="6_jm8k6"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_ciupd"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_dy5cq"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rybt6"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_y6yur"]
 
 [node name="ShopMenu" type="Control" node_paths=PackedStringArray("buy_ui", "sell_ui")]
 z_index = 4096
@@ -33,13 +33,14 @@ layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Buy" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "buy_btn")]
+[node name="Buy" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "buy_btn", "player_gold_label")]
 layout_mode = 2
 script = ExtResource("3_pol1i")
-item_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+item_scroll_list = NodePath("HBoxContainer/VBoxContainer/ItemScrollList")
 item_description = NodePath("HBoxContainer/ItemInfo/ItemDescription")
 item_price = NodePath("HBoxContainer/ItemInfo/ItemPrice")
 buy_btn = NodePath("HBoxContainer/ItemInfo/BuyButton")
+player_gold_label = NodePath("HBoxContainer/VBoxContainer/Player\'s Gold Label")
 metadata/_tab_index = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Buy"]
@@ -48,10 +49,20 @@ offset_left = 5.0
 offset_right = 475.0
 offset_bottom = 233.0
 
-[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Buy/HBoxContainer" instance=ExtResource("4_alty5")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Buy/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_ciupd")
+
+[node name="Player\'s Gold Label" type="Label" parent="VBoxContainer/TabContainer/Buy/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+text = "You have 10 Gold"
+
+[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Buy/HBoxContainer/VBoxContainer" instance=ExtResource("4_alty5")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_group = SubResource("ButtonGroup_dy5cq")
 scroll_container_size = Vector2(233, 233)
 minimum_button_size = Vector2(220, 0)
 
@@ -80,15 +91,16 @@ layout_mode = 2
 focus_mode = 0
 text = "Buy"
 
-[node name="Sell" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "sell_btn")]
+[node name="Sell" type="Control" parent="VBoxContainer/TabContainer" node_paths=PackedStringArray("item_scroll_list", "item_description", "item_price", "sell_btn", "player_gold_label")]
 visible = false
 z_index = 1
 layout_mode = 2
 script = ExtResource("6_jm8k6")
-item_scroll_list = NodePath("HBoxContainer/ItemScrollList")
+item_scroll_list = NodePath("HBoxContainer/VBoxContainer/ItemScrollList")
 item_description = NodePath("HBoxContainer/ItemInfo/ItemDescription")
 item_price = NodePath("HBoxContainer/ItemInfo/ItemPrice")
 sell_btn = NodePath("HBoxContainer/ItemInfo/SellButton")
+player_gold_label = NodePath("HBoxContainer/VBoxContainer/Player\'s Gold Label")
 metadata/_tab_index = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Sell"]
@@ -99,10 +111,20 @@ offset_right = 475.0
 offset_bottom = 233.0
 theme_override_constants/separation = 8
 
-[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Sell/HBoxContainer" instance=ExtResource("4_alty5")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Sell/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-btn_group = SubResource("ButtonGroup_rybt6")
+
+[node name="Player\'s Gold Label" type="Label" parent="VBoxContainer/TabContainer/Sell/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 21
+text = "You have 10 Gold"
+
+[node name="ItemScrollList" parent="VBoxContainer/TabContainer/Sell/HBoxContainer/VBoxContainer" instance=ExtResource("4_alty5")]
+layout_mode = 2
+size_flags_horizontal = 3
+btn_group = SubResource("ButtonGroup_y6yur")
 scroll_container_size = Vector2(231, 233)
 minimum_button_size = Vector2(220, 0)
 

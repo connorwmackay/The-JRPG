@@ -335,8 +335,7 @@ text = "Come buy the finest wares from across the lands."
 
 [node name="Apple TradeableItem" type="Node" parent="Merchant NPC"]
 script = ExtResource("5_v08bx")
-buy_price = 5.0
-sell_price = 2.0
+sell_price = 100.0
 item_name = "Red Apple"
 item_description = "A bright red apple."
 
