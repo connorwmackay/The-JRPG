@@ -38,6 +38,10 @@ func _process(delta: float) -> void:
 			if len(dialogue_queue) > 0:
 				if dialogue_queue[0] is DialogueShowShop:
 					shop_menu.update_and_show_shop_menu(dialogue_queue[0].buyable_items)
+				elif dialogue_queue[0] is ItemRewardDialogueItem:
+					$"/root/InventorySystem".add_item(dialogue_queue[0].item)
+				elif dialogue_queue[0] is GoldRewardDialogueItem:
+					$"/root/GoldSystem".player_gold += dialogue_queue[0].gold_reward
 				dialogue_queue.remove_at(0)
 
 # Update the dialogue box
