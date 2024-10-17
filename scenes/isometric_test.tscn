@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://blpjrx6evcgfq"]
+[gd_scene load_steps=24 format=4 uid="uid://blpjrx6evcgfq"]
 
 [ext_resource type="PackedScene" uid="uid://bk4vleifxyqh" path="res://nodes/event_area.tscn" id="1_w2rhd"]
 [ext_resource type="PackedScene" uid="uid://b8nvnh07w5y1s" path="res://nodes/player.tscn" id="2_k7m5x"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://nawqgya81boe" path="res://sprites/isometric_prototype.png" id="4_2uqo8"]
 [ext_resource type="Script" path="res://scripts/dialogue/dialogue_show_shop.gd" id="4_fc1oq"]
 [ext_resource type="Script" path="res://scripts/dialogue/dialogue_item.gd" id="4_gnl7v"]
-[ext_resource type="Script" path="res://scripts/quest/quest.gd" id="5_dkmqc"]
 [ext_resource type="Script" path="res://scripts/dialogue/dialogue_tree.gd" id="5_dod1e"]
 [ext_resource type="Script" path="res://scripts/hide_on_play.gd" id="5_i7fg0"]
 [ext_resource type="Script" path="res://tradeable_item.gd" id="5_v08bx"]
@@ -355,11 +354,13 @@ sell_price = 10.0
 item_name = "Wooden Shield"
 item_description = "Usually used to practise blocking."
 
-[node name="GoDeeperQuest" type="Node" parent="." node_paths=PackedStringArray("quest_giver_npc")]
-script = ExtResource("5_dkmqc")
-quest_name = "Go Even Deeper"
-quest_id = "go_even_deeper"
-quest_description = "Go even deeper inside Zero Two."
+[node name="BuyAppleQuest" type="Node" parent="." node_paths=PackedStringArray("item", "quest_giver_npc")]
+script = ExtResource("2_mb4d7")
+item = NodePath("../Merchant NPC/Apple TradeableItem")
+description_if_item_found = "Give the item to Zero Two."
+quest_name = "Buy an Apple"
+quest_id = "buy_apple"
+quest_description = "Buy an apple from the merchant and give it to Zero Two."
 quest_giver_npc = NodePath("../Zero Two NPC")
 
 [node name="FindTheKey_ItemFetchQuest" type="Node" parent="." node_paths=PackedStringArray("item", "quest_giver_npc")]
@@ -476,7 +477,7 @@ text = "You should visit the mansion, I'll make sure Roswall knows you are a dep
 z_index = 1
 position = Vector2(113, 73)
 npc_name = "Zero Two"
-npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("GoDeeperAcceptedDialogueTree")]
+npc_dialogue_trees = [NodePath("BaseDialogueTree"), NodePath("AppleAcceptedDialogueTree"), NodePath("AppleCompletedDialogueTree"), NodePath("AppleFoundDialogueTree")]
 
 [node name="BaseDialogueTree" type="Node" parent="Zero Two NPC"]
 script = ExtResource("5_dod1e")
@@ -484,47 +485,70 @@ script = ExtResource("5_dod1e")
 [node name="DialogueItem0" type="Node" parent="Zero Two NPC/BaseDialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Zero Two"
-text = "Let me get a taste of you. After all...you are now my darling!"
+text = "You wouldn't happen to have an apple would you? I'm really hungry."
 
 [node name="DialogueItem1" type="Node" parent="Zero Two NPC/BaseDialogueTree"]
 script = ExtResource("4_gnl7v")
-speaker_name = "Hero"
-text = "I feel myself going deeper inside you!"
+speaker_name = "Zero Two"
+text = "The merchant that sells the apples banned me from their shop."
 
 [node name="DialogueItem2_Quest" type="Node" parent="Zero Two NPC/BaseDialogueTree" node_paths=PackedStringArray("quest_if_top_choice")]
 script = ExtResource("7_klnrh")
-top_choice_text = "Hell yes!"
-bottom_choice_text = "Fuck no!"
-quest_if_top_choice = NodePath("../../../GoDeeperQuest")
+top_choice_text = "Yes"
+bottom_choice_text = "No"
+quest_if_top_choice = NodePath("../../../BuyAppleQuest")
 speaker_name = "Zero Two"
-text = "How about you go even deeper?"
+text = "Could you bring me an apple?"
 
-[node name="GoDeeperAcceptedDialogueTree" type="Node" parent="Zero Two NPC"]
+[node name="AppleAcceptedDialogueTree" type="Node" parent="Zero Two NPC"]
 script = ExtResource("5_dod1e")
-tree_name = "go_even_deeper_accepted"
+tree_name = "buy_apple_accepted"
 
-[node name="DialogueItem0" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree"]
+[node name="DialogueItem0" type="Node" parent="Zero Two NPC/AppleAcceptedDialogueTree"]
 script = ExtResource("4_gnl7v")
 speaker_name = "Zero Two"
-text = "Hurry up and go even deeper!"
+text = "Have you bought an apple yet? I'm really hungry."
 
-[node name="Dialogue_QuestCompletion" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree" node_paths=PackedStringArray("quest")]
-script = ExtResource("7_nyxv3")
-quest = NodePath("../../../GoDeeperQuest")
+[node name="DialogueItem1" type="Node" parent="Zero Two NPC/AppleAcceptedDialogueTree"]
+script = ExtResource("4_gnl7v")
 speaker_name = "Hero"
-text = "I - I'm not ready yet!"
+text = "Not yet, but I will soon."
 
-[node name="ItemRewardDialogueItem" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree" node_paths=PackedStringArray("item")]
+[node name="AppleFoundDialogueTree" type="Node" parent="Zero Two NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "buy_apple_found"
+
+[node name="DialogueItem0" type="Node" parent="Zero Two NPC/AppleFoundDialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Hero"
+text = "I have that apple you asked for."
+
+[node name="DialogueItem1" type="Node" parent="Zero Two NPC/AppleFoundDialogueTree" node_paths=PackedStringArray("quest")]
+script = ExtResource("7_nyxv3")
+quest = NodePath("../../../BuyAppleQuest")
+speaker_name = "Zero Two"
+text = "Thank you so much! "
+
+[node name="ItemRewardDialogueItem" type="Node" parent="Zero Two NPC/AppleFoundDialogueTree" node_paths=PackedStringArray("item")]
 script = ExtResource("15_2fhry")
 item = NodePath("TradeableItem")
-text = "Recieved 1x Love Letter."
+text = "Recieved 1x Wizard's Staff."
 
-[node name="TradeableItem" type="Node" parent="Zero Two NPC/GoDeeperAcceptedDialogueTree/ItemRewardDialogueItem"]
+[node name="TradeableItem" type="Node" parent="Zero Two NPC/AppleFoundDialogueTree/ItemRewardDialogueItem"]
 script = ExtResource("5_v08bx")
 buy_price = 60.0
 sell_price = 40.0
-item_name = "Love Letter"
-item_description = "A love letter from Zero Two."
+item_name = "Wizard's Staff"
+item_description = "A staff imbued with magical energy, typically used by wizards."
+
+[node name="AppleCompletedDialogueTree" type="Node" parent="Zero Two NPC"]
+script = ExtResource("5_dod1e")
+tree_name = "buy_apple_completed"
+
+[node name="DialogueItem" type="Node" parent="Zero Two NPC/AppleCompletedDialogueTree"]
+script = ExtResource("4_gnl7v")
+speaker_name = "Zero Two"
+text = "Thanks again for bringing me that apple, you're a life saver!"
 
 [node name="MapTilemap_Layer0" type="TileMapLayer" parent="."]
 y_sort_enabled = true
